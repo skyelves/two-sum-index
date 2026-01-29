@@ -144,13 +144,27 @@
 
         function renderCharts(data) {
             const records = data.records;
-            if (records.length === 0) return;
+            if (records.length < 2) return;
 
-            const labels = records.map(r => r.date);
-            const dailyIncrease = records.map((r, i) => {
-                if (i === 0) return 0;
-                return r.totalAccepted - records[i - 1].totalAccepted;
-            });
+            // Calculate daily average growth between each pair of records
+            const dailyAvgGrowth = [];
+            const labels = [];
+
+            for (let i = 1; i < records.length; i++) {
+                const prev = records[i - 1];
+                const curr = records[i];
+                const daysDiff = (new Date(curr.date) - new Date(prev.date)) / (1000 * 60 * 60 * 24);
+                const increase = curr.totalAccepted - prev.totalAccepted;
+                const avgPerDay = daysDiff > 0 ? increase / daysDiff : 0;
+                dailyAvgGrowth.push(avgPerDay);
+                labels.push(curr.date);
+            }
+
+            // Normalize to 0-100 scale
+            const min = Math.min(...dailyAvgGrowth);
+            const max = Math.max(...dailyAvgGrowth);
+            const range = max - min || 1;
+            const normalized = dailyAvgGrowth.map(v => ((v - min) / range) * 100);
 
             if (dailyChartInstance) {
                 dailyChartInstance.destroy();
@@ -166,7 +180,7 @@
                 data: {
                     labels: labels,
                     datasets: [{
-                        data: dailyIncrease,
+                        data: normalized,
                         borderColor: '#1d1d1f',
                         backgroundColor: 'rgba(0, 0, 0, 0.03)',
                         fill: true,
@@ -186,12 +200,12 @@
                             ticks: { color: '#86868b', font: { size: 11 } }
                         },
                         y: {
-                            beginAtZero: true,
+                            min: 0,
+                            max: 100,
                             grid: { color: '#e5e5e5' },
                             ticks: {
                                 color: '#86868b',
-                                font: { size: 11 },
-                                callback: value => formatNumber(value)
+                                font: { size: 11 }
                             }
                         }
                     }
