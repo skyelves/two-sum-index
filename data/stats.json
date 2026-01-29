@@ -4,14 +4,199 @@
     "title": "Two Sum",
     "titleSlug": "two-sum"
   },
-  "lastUpdated": "2026-01-29T07:55:35.248Z",
+  "lastUpdated": "2026-01-29T08:55:08.825Z",
   "records": [
     {
-      "date": "2026-01-29",
-      "totalAccepted": 20414618,
-      "totalSubmission": 35862307,
-      "acRate": 56.9,
-      "timestamp": "2026-01-29T07:55:35.248Z"
+      "date": "2025-01-22",
+      "totalAccepted": 15870913,
+      "totalSubmission": 29013231,
+      "acRate": 54.7,
+      "timestamp": "2026-01-29T08:53:24.648Z",
+      "source": "wayback-html"
+    },
+    {
+      "date": "2025-01-25",
+      "totalAccepted": 15898771,
+      "totalSubmission": 29053114,
+      "acRate": 54.72,
+      "timestamp": "2026-01-29T08:53:30.334Z",
+      "source": "wayback-html"
+    },
+    {
+      "date": "2025-01-31",
+      "totalAccepted": 15981303,
+      "totalSubmission": 29172995,
+      "acRate": 54.78,
+      "timestamp": "2026-01-29T08:53:34.508Z",
+      "source": "wayback-html"
+    },
+    {
+      "date": "2025-02-14",
+      "totalAccepted": 16147389,
+      "totalSubmission": 29412506,
+      "acRate": 54.9,
+      "timestamp": "2026-01-29T08:53:38.832Z",
+      "source": "wayback-html"
+    },
+    {
+      "date": "2025-02-22",
+      "totalAccepted": 16242117,
+      "totalSubmission": 29549955,
+      "acRate": 54.96,
+      "timestamp": "2026-01-29T08:53:44.478Z",
+      "source": "wayback-html"
+    },
+    {
+      "date": "2025-03-10",
+      "totalAccepted": 16430006,
+      "totalSubmission": 29819479,
+      "acRate": 55.1,
+      "timestamp": "2026-01-29T08:53:48.490Z",
+      "source": "wayback-html"
+    },
+    {
+      "date": "2025-03-11",
+      "totalAccepted": 16449859,
+      "totalSubmission": 29848363,
+      "acRate": 55.11,
+      "timestamp": "2026-01-29T08:53:53.366Z",
+      "source": "wayback-html"
+    },
+    {
+      "date": "2025-03-22",
+      "totalAccepted": 16563527,
+      "totalSubmission": 30011808,
+      "acRate": 55.19,
+      "timestamp": "2026-01-29T08:53:57.637Z",
+      "source": "wayback-html"
+    },
+    {
+      "date": "2025-03-28",
+      "totalAccepted": 16632178,
+      "totalSubmission": 30110986,
+      "acRate": 55.24,
+      "timestamp": "2026-01-29T08:54:02.105Z",
+      "source": "wayback-html"
+    },
+    {
+      "date": "2025-03-31",
+      "totalAccepted": 16668170,
+      "totalSubmission": 30163624,
+      "acRate": 55.26,
+      "timestamp": "2026-01-29T08:54:06.120Z",
+      "source": "wayback-html"
+    },
+    {
+      "date": "2025-04-02",
+      "totalAccepted": 16683434,
+      "totalSubmission": 30185483,
+      "acRate": 55.27,
+      "timestamp": "2026-01-29T08:54:10.233Z",
+      "source": "wayback-html"
+    },
+    {
+      "date": "2025-04-13",
+      "totalAccepted": 16797916,
+      "totalSubmission": 30348870,
+      "acRate": 55.35,
+      "timestamp": "2026-01-29T08:54:16.139Z",
+      "source": "wayback-html"
+    },
+    {
+      "date": "2025-04-15",
+      "totalAccepted": 16821156,
+      "totalSubmission": 30381954,
+      "acRate": 55.37,
+      "timestamp": "2026-01-29T08:54:20.906Z",
+      "source": "wayback-html"
+    },
+    {
+      "date": "2025-05-06",
+      "totalAccepted": 17032208,
+      "totalSubmission": 30685303,
+      "acRate": 55.51,
+      "timestamp": "2026-01-29T08:54:24.363Z",
+      "source": "wayback-html"
+    },
+    {
+      "date": "2025-05-16",
+      "totalAccepted": 17140279,
+      "totalSubmission": 30842110,
+      "acRate": 55.57,
+      "timestamp": "2026-01-29T08:54:28.498Z",
+      "source": "wayback-html"
+    },
+    {
+      "date": "2025-05-25",
+      "totalAccepted": 17236631,
+      "totalSubmission": 30979991,
+      "acRate": 55.64,
+      "timestamp": "2026-01-29T08:54:32.821Z",
+      "source": "wayback-html"
+    },
+    {
+      "date": "2025-06-30",
+      "totalAccepted": 17679421,
+      "totalSubmission": 31664009,
+      "acRate": 55.83,
+      "timestamp": "2026-01-29T08:54:37.425Z",
+      "source": "wayback-html"
+    },
+    {
+      "date": "2025-07-09",
+      "totalAccepted": 17808517,
+      "totalSubmission": 31863449,
+      "acRate": 55.89,
+      "timestamp": "2026-01-29T08:54:41.284Z",
+      "source": "wayback-html"
+    },
+    {
+      "date": "2025-09-08",
+      "totalAccepted": 18698913,
+      "totalSubmission": 33237080,
+      "acRate": 56.26,
+      "timestamp": "2026-01-29T08:54:45.809Z",
+      "source": "wayback-html"
+    },
+    {
+      "date": "2025-09-10",
+      "totalAccepted": 18733630,
+      "totalSubmission": 33290863,
+      "acRate": 56.27,
+      "timestamp": "2026-01-29T08:54:50.691Z",
+      "source": "wayback-html"
+    },
+    {
+      "date": "2025-10-05",
+      "totalAccepted": 19050093,
+      "totalSubmission": 33786193,
+      "acRate": 56.38,
+      "timestamp": "2026-01-29T08:54:54.702Z",
+      "source": "wayback-html"
+    },
+    {
+      "date": "2025-11-02",
+      "totalAccepted": 19371331,
+      "totalSubmission": 34284579,
+      "acRate": 56.5,
+      "timestamp": "2026-01-29T08:54:58.234Z",
+      "source": "wayback-html"
+    },
+    {
+      "date": "2025-12-02",
+      "totalAccepted": 19688299,
+      "totalSubmission": 34775292,
+      "acRate": 56.62,
+      "timestamp": "2026-01-29T08:55:01.770Z",
+      "source": "wayback-html"
+    },
+    {
+      "date": "2025-12-20",
+      "totalAccepted": 19885637,
+      "totalSubmission": 35076527,
+      "acRate": 56.69,
+      "timestamp": "2026-01-29T08:55:06.787Z",
+      "source": "wayback-html"
     }
   ]
 }
