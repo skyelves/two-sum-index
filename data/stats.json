@@ -1,0 +1,17 @@
+{
+  "questionInfo": {
+    "questionId": "1",
+    "title": "Two Sum",
+    "titleSlug": "two-sum"
+  },
+  "lastUpdated": "2026-01-29T07:55:35.248Z",
+  "records": [
+    {
+      "date": "2026-01-29",
+      "totalAccepted": 20414618,
+      "totalSubmission": 35862307,
+      "acRate": 56.9,
+      "timestamp": "2026-01-29T07:55:35.248Z"
+    }
+  ]
+}

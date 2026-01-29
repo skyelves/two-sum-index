@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Two Sum Index - LeetCode 第一题学习趋势</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 12px;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .stat-label {
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .chart-container {
+            position: relative;
+            height: 400px;
+        }
+
+        .chart-title {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        footer {
+            text-align: center;
+            color: white;
+            margin-top: 30px;
+            opacity: 0.8;
+        }
+
+        footer a {
+            color: white;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 50px;
+            color: #666;
+        }
+
+        .no-data {
+            text-align: center;
+            padding: 50px;
+            color: #999;
+        }
+
+        .no-data p {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Two Sum Index</h1>
+            <p>追踪 LeetCode 第一题的每日学习人数变化</p>
+        </header>
+
+        <div class="card">
+            <div id="stats-summary" class="stats-grid">
+                <div class="loading">加载中...</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2 class="chart-title">每日新增通过人数趋势</h2>
+            <div class="chart-container">
+                <canvas id="dailyChart"></canvas>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2 class="chart-title">累计通过人数趋势</h2>
+            <div class="chart-container">
+                <canvas id="totalChart"></canvas>
+            </div>
+        </div>
+
+        <footer>
+            <p>数据每日自动更新 |
+               <a href="https://leetcode.com/problems/two-sum/" target="_blank">查看题目</a> |
+               <a href="https://github.com/fewwwww/two-sum-index" target="_blank">GitHub</a>
+            </p>
+            <p id="last-updated"></p>
+        </footer>
+    </div>
+
+    <script>
+        let dailyChartInstance = null;
+        let totalChartInstance = null;
+
+        async function loadData() {
+            try {
+                const response = await fetch('./data/stats.json');
+                const data = await response.json();
+                renderStats(data);
+                renderCharts(data);
+            } catch (error) {
+                console.error('Error loading data:', error);
+                document.getElementById('stats-summary').innerHTML =
+                    '<div class="loading">数据加载失败，请稍后重试</div>';
+            }
+        }
+
+        function formatNumber(num) {
+            if (num >= 1000000) {
+                return (num / 1000000).toFixed(2) + 'M';
+            } else if (num >= 1000) {
+                return (num / 1000).toFixed(1) + 'K';
+            }
+            return num.toString();
+        }
+
+        function renderStats(data) {
+            const records = data.records;
+
+            if (records.length === 0) {
+                document.getElementById('stats-summary').innerHTML = `
+                    <div class="no-data">
+                        <p>暂无数据</p>
+                        <p>数据将在 GitHub Actions 首次运行后显示</p>
+                    </div>
+                `;
+                return;
+            }
+
+            const latest = records[records.length - 1];
+            const previous = records.length > 1 ? records[records.length - 2] : null;
+
+            const dailyIncrease = previous
+                ? latest.totalAccepted - previous.totalAccepted
+                : 0;
+
+            document.getElementById('stats-summary').innerHTML = `
+                <div class="stat-item">
+                    <div class="stat-value">${formatNumber(latest.totalAccepted)}</div>
+                    <div class="stat-label">累计通过人数</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">${formatNumber(latest.totalSubmission)}</div>
+                    <div class="stat-label">累计提交次数</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">${latest.acRate.toFixed(1)}%</div>
+                    <div class="stat-label">通过率</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">+${formatNumber(dailyIncrease)}</div>
+                    <div class="stat-label">昨日新增通过</div>
+                </div>
+            `;
+
+            if (data.lastUpdated) {
+                document.getElementById('last-updated').textContent =
+                    `最后更新: ${new Date(data.lastUpdated).toLocaleString('zh-CN')}`;
+            }
+        }
+
+        function renderCharts(data) {
+            const records = data.records;
+
+            if (records.length === 0) {
+                return;
+            }
+
+            const labels = records.map(r => r.date);
+
+            // 计算每日新增
+            const dailyIncrease = records.map((r, i) => {
+                if (i === 0) return 0;
+                return r.totalAccepted - records[i - 1].totalAccepted;
+            });
+
+            // 销毁旧图表
+            if (dailyChartInstance) {
+                dailyChartInstance.destroy();
+            }
+            if (totalChartInstance) {
+                totalChartInstance.destroy();
+            }
+
+            // 每日新增通过人数图表
+            dailyChartInstance = new Chart(document.getElementById('dailyChart'), {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: '每日新增通过人数',
+                        data: dailyIncrease,
+                        borderColor: '#667eea',
+                        backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                        fill: true,
+                        tension: 0.4,
+                        pointRadius: 4,
+                        pointHoverRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top'
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: value => formatNumber(value)
+                            }
+                        }
+                    }
+                }
+            });
+
+            // 累计通过人数图表
+            totalChartInstance = new Chart(document.getElementById('totalChart'), {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: '累计通过人数',
+                        data: records.map(r => r.totalAccepted),
+                        borderColor: '#764ba2',
+                        backgroundColor: 'rgba(118, 75, 162, 0.1)',
+                        fill: true,
+                        tension: 0.4,
+                        pointRadius: 4,
+                        pointHoverRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'top'
+                        }
+                    },
+                    scales: {
+                        y: {
+                            ticks: {
+                                callback: value => formatNumber(value)
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // 页面加载时获取数据
+        loadData();
+    </script>
+</body>
+</html>
