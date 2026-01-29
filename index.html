@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Two Sum Index - LeetCode Problem #1 Trend</title>
+    <title>Two Sum Index</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         * {
@@ -13,107 +13,130 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', sans-serif;
+            background: #fff;
+            color: #1d1d1f;
             min-height: 100vh;
-            padding: 20px;
+            padding: 60px 20px;
+            line-height: 1.5;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 980px;
             margin: 0 auto;
         }
 
         header {
             text-align: center;
-            color: white;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
         }
 
         header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 10px;
+            font-size: 48px;
+            font-weight: 600;
+            letter-spacing: -0.5px;
         }
 
-        header p {
-            font-size: 1.1rem;
-            opacity: 0.9;
+        .about-section {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto 60px;
         }
 
-        .card {
-            background: white;
-            border-radius: 16px;
-            padding: 30px;
-            margin-bottom: 20px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        .about-section p {
+            color: #86868b;
+            font-size: 17px;
+        }
+
+        .about-section strong {
+            color: #1d1d1f;
         }
 
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(4, 1fr);
             gap: 20px;
-            margin-bottom: 30px;
+            margin-bottom: 60px;
+        }
+
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
 
         .stat-item {
             text-align: center;
-            padding: 20px;
-            background: #f8f9fa;
-            border-radius: 12px;
+            padding: 24px 16px;
         }
 
         .stat-value {
-            font-size: 2rem;
-            font-weight: bold;
-            color: #667eea;
+            font-size: 40px;
+            font-weight: 600;
+            color: #1d1d1f;
+            letter-spacing: -1px;
         }
 
         .stat-label {
-            color: #666;
-            margin-top: 5px;
+            color: #86868b;
+            font-size: 14px;
+            margin-top: 8px;
+        }
+
+        .chart-section {
+            margin-bottom: 60px;
+        }
+
+        .chart-title {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 24px;
+            color: #1d1d1f;
         }
 
         .chart-container {
             position: relative;
-            height: 400px;
-        }
-
-        .chart-title {
-            margin-bottom: 20px;
-            color: #333;
+            height: 320px;
+            padding: 20px;
+            background: #fbfbfd;
+            border-radius: 12px;
         }
 
         footer {
             text-align: center;
-            color: white;
-            margin-top: 30px;
-            opacity: 0.8;
+            padding-top: 40px;
+            border-top: 1px solid #d2d2d7;
+            color: #86868b;
+            font-size: 14px;
         }
 
         footer a {
-            color: white;
+            color: #06c;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        footer p {
+            margin-bottom: 8px;
         }
 
         .loading {
             text-align: center;
-            padding: 50px;
-            color: #666;
+            padding: 40px;
+            color: #86868b;
         }
 
         .no-data {
             text-align: center;
-            padding: 50px;
-            color: #999;
+            padding: 40px;
+            color: #86868b;
         }
 
         .no-data p {
-            margin-bottom: 10px;
-        }
-
-        .about-section p {
-            color: #555;
-            line-height: 1.7;
-            font-size: 1.05rem;
+            margin-bottom: 8px;
         }
     </style>
 </head>
@@ -123,34 +146,33 @@
             <h1>Two Sum Index</h1>
         </header>
 
-        <div class="card about-section">
+        <div class="about-section">
             <p>Two Sum daily solve counts reflects <strong>job market trends</strong> — more activity often signals increased hiring or job-seeking in tech.</p>
         </div>
 
-        <div class="card">
-            <div id="stats-summary" class="stats-grid">
-                <div class="loading">Loading...</div>
-            </div>
+        <div id="stats-summary" class="stats-grid">
+            <div class="loading">Loading...</div>
         </div>
 
-        <div class="card">
-            <h2 class="chart-title">Daily New Accepted Trend</h2>
+        <div class="chart-section">
+            <h2 class="chart-title">Daily New Accepted</h2>
             <div class="chart-container">
                 <canvas id="dailyChart"></canvas>
             </div>
         </div>
 
-        <div class="card">
-            <h2 class="chart-title">Total Accepted Trend</h2>
+        <div class="chart-section">
+            <h2 class="chart-title">Total Accepted</h2>
             <div class="chart-container">
                 <canvas id="totalChart"></canvas>
             </div>
         </div>
 
         <footer>
-            <p>Data updated daily |
-               <a href="https://leetcode.com/problems/two-sum/" target="_blank">View Problem</a> |
-               <a href="https://github.com/skyelves/two-sum-index" target="_blank">GitHub</a>
+            <p>Data updated hourly</p>
+            <p>
+                <a href="https://leetcode.com/problems/two-sum/" target="_blank">View Problem</a> ·
+                <a href="https://github.com/skyelves/two-sum-index" target="_blank">GitHub</a>
             </p>
             <p id="last-updated"></p>
         </footer>
@@ -169,7 +191,7 @@
             } catch (error) {
                 console.error('Error loading data:', error);
                 document.getElementById('stats-summary').innerHTML =
-                    '<div class="loading">Failed to load data. Please try again later.</div>';
+                    '<div class="loading">Failed to load data.</div>';
             }
         }
 
@@ -217,13 +239,13 @@
                 </div>
                 <div class="stat-item">
                     <div class="stat-value">+${formatNumber(dailyIncrease)}</div>
-                    <div class="stat-label">New Accepted Yesterday</div>
+                    <div class="stat-label">New Yesterday</div>
                 </div>
             `;
 
             if (data.lastUpdated) {
                 document.getElementById('last-updated').textContent =
-                    `Last Updated: ${new Date(data.lastUpdated).toLocaleString('en-US')}`;
+                    `Last updated: ${new Date(data.lastUpdated).toLocaleString('en-US')}`;
             }
         }
 
@@ -236,13 +258,11 @@
 
             const labels = records.map(r => r.date);
 
-            // Calculate daily increase
             const dailyIncrease = records.map((r, i) => {
                 if (i === 0) return 0;
                 return r.totalAccepted - records[i - 1].totalAccepted;
             });
 
-            // Destroy old charts
             if (dailyChartInstance) {
                 dailyChartInstance.destroy();
             }
@@ -250,79 +270,74 @@
                 totalChartInstance.destroy();
             }
 
-            // Daily new accepted chart
+            const chartOptions = {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    x: {
+                        grid: {
+                            display: false
+                        },
+                        ticks: {
+                            color: '#86868b',
+                            font: { size: 12 }
+                        }
+                    },
+                    y: {
+                        grid: {
+                            color: '#e5e5e5'
+                        },
+                        ticks: {
+                            color: '#86868b',
+                            font: { size: 12 },
+                            callback: value => formatNumber(value)
+                        }
+                    }
+                }
+            };
+
             dailyChartInstance = new Chart(document.getElementById('dailyChart'), {
                 type: 'line',
                 data: {
                     labels: labels,
                     datasets: [{
-                        label: 'Daily New Accepted',
                         data: dailyIncrease,
-                        borderColor: '#667eea',
-                        backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                        borderColor: '#1d1d1f',
+                        backgroundColor: 'rgba(0, 0, 0, 0.03)',
                         fill: true,
-                        tension: 0.4,
-                        pointRadius: 4,
-                        pointHoverRadius: 6
+                        tension: 0.3,
+                        pointRadius: 3,
+                        pointBackgroundColor: '#1d1d1f',
+                        borderWidth: 2
                     }]
                 },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            display: true,
-                            position: 'top'
-                        }
-                    },
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            ticks: {
-                                callback: value => formatNumber(value)
-                            }
-                        }
-                    }
-                }
+                options: { ...chartOptions, scales: { ...chartOptions.scales, y: { ...chartOptions.scales.y, beginAtZero: true } } }
             });
 
-            // Total accepted chart
             totalChartInstance = new Chart(document.getElementById('totalChart'), {
                 type: 'line',
                 data: {
                     labels: labels,
                     datasets: [{
-                        label: 'Total Accepted',
                         data: records.map(r => r.totalAccepted),
-                        borderColor: '#764ba2',
-                        backgroundColor: 'rgba(118, 75, 162, 0.1)',
+                        borderColor: '#1d1d1f',
+                        backgroundColor: 'rgba(0, 0, 0, 0.03)',
                         fill: true,
-                        tension: 0.4,
-                        pointRadius: 4,
-                        pointHoverRadius: 6
+                        tension: 0.3,
+                        pointRadius: 3,
+                        pointBackgroundColor: '#1d1d1f',
+                        borderWidth: 2
                     }]
                 },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            display: true,
-                            position: 'top'
-                        }
-                    },
-                    scales: {
-                        y: {
-                            ticks: {
-                                callback: value => formatNumber(value)
-                            }
-                        }
-                    }
-                }
+                options: chartOptions
             });
         }
 
-        // Load data on page load
         loadData();
     </script>
 </body>
