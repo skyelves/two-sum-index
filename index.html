@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Two Sum Index - LeetCode 第一题学习趋势</title>
+    <title>Two Sum Index - LeetCode Problem #1 Trend</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         * {
@@ -115,33 +115,33 @@
     <div class="container">
         <header>
             <h1>Two Sum Index</h1>
-            <p>追踪 LeetCode 第一题的每日学习人数变化</p>
+            <p>Track daily learner statistics for LeetCode Problem #1</p>
         </header>
 
         <div class="card">
             <div id="stats-summary" class="stats-grid">
-                <div class="loading">加载中...</div>
+                <div class="loading">Loading...</div>
             </div>
         </div>
 
         <div class="card">
-            <h2 class="chart-title">每日新增通过人数趋势</h2>
+            <h2 class="chart-title">Daily New Accepted Trend</h2>
             <div class="chart-container">
                 <canvas id="dailyChart"></canvas>
             </div>
         </div>
 
         <div class="card">
-            <h2 class="chart-title">累计通过人数趋势</h2>
+            <h2 class="chart-title">Total Accepted Trend</h2>
             <div class="chart-container">
                 <canvas id="totalChart"></canvas>
             </div>
         </div>
 
         <footer>
-            <p>数据每日自动更新 |
-               <a href="https://leetcode.com/problems/two-sum/" target="_blank">查看题目</a> |
-               <a href="https://github.com/fewwwww/two-sum-index" target="_blank">GitHub</a>
+            <p>Data updated daily |
+               <a href="https://leetcode.com/problems/two-sum/" target="_blank">View Problem</a> |
+               <a href="https://github.com/skyelves/two-sum-index" target="_blank">GitHub</a>
             </p>
             <p id="last-updated"></p>
         </footer>
@@ -160,7 +160,7 @@
             } catch (error) {
                 console.error('Error loading data:', error);
                 document.getElementById('stats-summary').innerHTML =
-                    '<div class="loading">数据加载失败，请稍后重试</div>';
+                    '<div class="loading">Failed to load data. Please try again later.</div>';
             }
         }
 
@@ -179,8 +179,8 @@
             if (records.length === 0) {
                 document.getElementById('stats-summary').innerHTML = `
                     <div class="no-data">
-                        <p>暂无数据</p>
-                        <p>数据将在 GitHub Actions 首次运行后显示</p>
+                        <p>No data available</p>
+                        <p>Data will appear after the first GitHub Actions run</p>
                     </div>
                 `;
                 return;
@@ -196,25 +196,25 @@
             document.getElementById('stats-summary').innerHTML = `
                 <div class="stat-item">
                     <div class="stat-value">${formatNumber(latest.totalAccepted)}</div>
-                    <div class="stat-label">累计通过人数</div>
+                    <div class="stat-label">Total Accepted</div>
                 </div>
                 <div class="stat-item">
                     <div class="stat-value">${formatNumber(latest.totalSubmission)}</div>
-                    <div class="stat-label">累计提交次数</div>
+                    <div class="stat-label">Total Submissions</div>
                 </div>
                 <div class="stat-item">
                     <div class="stat-value">${latest.acRate.toFixed(1)}%</div>
-                    <div class="stat-label">通过率</div>
+                    <div class="stat-label">Acceptance Rate</div>
                 </div>
                 <div class="stat-item">
                     <div class="stat-value">+${formatNumber(dailyIncrease)}</div>
-                    <div class="stat-label">昨日新增通过</div>
+                    <div class="stat-label">New Accepted Yesterday</div>
                 </div>
             `;
 
             if (data.lastUpdated) {
                 document.getElementById('last-updated').textContent =
-                    `最后更新: ${new Date(data.lastUpdated).toLocaleString('zh-CN')}`;
+                    `Last Updated: ${new Date(data.lastUpdated).toLocaleString('en-US')}`;
             }
         }
 
@@ -227,13 +227,13 @@
 
             const labels = records.map(r => r.date);
 
-            // 计算每日新增
+            // Calculate daily increase
             const dailyIncrease = records.map((r, i) => {
                 if (i === 0) return 0;
                 return r.totalAccepted - records[i - 1].totalAccepted;
             });
 
-            // 销毁旧图表
+            // Destroy old charts
             if (dailyChartInstance) {
                 dailyChartInstance.destroy();
             }
@@ -241,13 +241,13 @@
                 totalChartInstance.destroy();
             }
 
-            // 每日新增通过人数图表
+            // Daily new accepted chart
             dailyChartInstance = new Chart(document.getElementById('dailyChart'), {
                 type: 'line',
                 data: {
                     labels: labels,
                     datasets: [{
-                        label: '每日新增通过人数',
+                        label: 'Daily New Accepted',
                         data: dailyIncrease,
                         borderColor: '#667eea',
                         backgroundColor: 'rgba(102, 126, 234, 0.1)',
@@ -277,13 +277,13 @@
                 }
             });
 
-            // 累计通过人数图表
+            // Total accepted chart
             totalChartInstance = new Chart(document.getElementById('totalChart'), {
                 type: 'line',
                 data: {
                     labels: labels,
                     datasets: [{
-                        label: '累计通过人数',
+                        label: 'Total Accepted',
                         data: records.map(r => r.totalAccepted),
                         borderColor: '#764ba2',
                         backgroundColor: 'rgba(118, 75, 162, 0.1)',
@@ -313,7 +313,7 @@
             });
         }
 
-        // 页面加载时获取数据
+        // Load data on page load
         loadData();
     </script>
 </body>
