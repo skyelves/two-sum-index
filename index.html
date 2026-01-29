@@ -161,13 +161,6 @@
             </div>
         </div>
 
-        <div class="chart-section">
-            <h2 class="chart-title">Total Accepted</h2>
-            <div class="chart-container">
-                <canvas id="totalChart"></canvas>
-            </div>
-        </div>
-
         <footer>
             <p>Data updated hourly</p>
             <p>
@@ -180,7 +173,6 @@
 
     <script>
         let dailyChartInstance = null;
-        let totalChartInstance = null;
 
         async function loadData() {
             try {
@@ -266,9 +258,6 @@
             if (dailyChartInstance) {
                 dailyChartInstance.destroy();
             }
-            if (totalChartInstance) {
-                totalChartInstance.destroy();
-            }
 
             const chartOptions = {
                 responsive: true,
@@ -317,24 +306,6 @@
                     }]
                 },
                 options: { ...chartOptions, scales: { ...chartOptions.scales, y: { ...chartOptions.scales.y, beginAtZero: true } } }
-            });
-
-            totalChartInstance = new Chart(document.getElementById('totalChart'), {
-                type: 'line',
-                data: {
-                    labels: labels,
-                    datasets: [{
-                        data: records.map(r => r.totalAccepted),
-                        borderColor: '#1d1d1f',
-                        backgroundColor: 'rgba(0, 0, 0, 0.03)',
-                        fill: true,
-                        tension: 0.3,
-                        pointRadius: 3,
-                        pointBackgroundColor: '#1d1d1f',
-                        borderWidth: 2
-                    }]
-                },
-                options: chartOptions
             });
         }
 
