@@ -4,7 +4,7 @@
     "title": "Two Sum",
     "titleSlug": "two-sum"
   },
-  "lastUpdated": "2026-09-04T05:28:15.622Z",
+  "lastUpdated": "2026-09-04T10:33:28.082Z",
   "records": [
     {
       "date": "2025-01-22",
@@ -1726,10 +1726,10 @@
     },
     {
       "date": "2026-09-04",
-      "totalAccepted": 23370335,
-      "totalSubmission": 40218874,
+      "totalAccepted": 23373285,
+      "totalSubmission": 40223437,
       "acRate": 58.1,
-      "timestamp": "2026-09-04T05:28:15.617Z"
+      "timestamp": "2026-09-04T10:33:28.074Z"
     }
   ]
 }
